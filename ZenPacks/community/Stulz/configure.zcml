@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:zcml="http://namespaces.zope.org/zcml">
+
+    <configure zcml:condition="installed Products.Zuul">
+
+        <adapter factory=".info.StulzTemperatureInfo"
+                 for=".StulzTemperature.StulzTemperature"
+                 provides=".interfaces.IStulzTemperatureInfo"
+                 />
+
+        <adapter factory=".info.StulzComponentsInfo"
+                 for=".StulzComponents.StulzComponents"
+                 provides=".interfaces.IStulzComponentsInfo"
+                 />
+
+        <adapter factory=".info.StulzRunTimesInfo"
+                 for=".StulzRunTimes.StulzRunTimes"
+                 provides=".interfaces.IStulzRunTimesInfo"
+                 />
+
+        <adapter factory=".info.StulzAlarmsInfo"
+                 for=".StulzAlarms.StulzAlarms"
+                 provides=".interfaces.IStulzAlarmsInfo"
+                 />
+
+        <browser:resourceDirectory
+                 name="Stulz"
+                 directory="resources"
+                 />
+
+        <browser:viewlet
+                 name="js-Stulz"
+                 for=".StulzDevice.StulzDevice"
+                 paths="/++resource++Stulz/Stulz.js"
+                 weight="10"
+                 manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                 class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                 permission="zope2.Public"
+                 />
+    </configure>
+</configure>
